@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@vimeo/player": "^2.19.0",
+    "simplelightbox": "^2.13.0"
+  }
+}
