@@ -1,21 +1,18 @@
-// Import Vimeo player library and lodash.throttle
-import Player from "@vimeo/player";
-import { throttle } from "lodash";
+import { Player } from "@vimeo/player/dist/player.js";
+import throttle from "lodash.throttle";
 
-// Initialize Vimeo player
-const player = new Player("vimeo-player");
+const iframe = document.querySelector("#vimeo-player");
+const player = new Player(iframe);
 
-// Get the current playback time from local storage
-let currentTime = localStorage.getItem("videoplayer-current-time") || 0;
-
-// Set the playback time on the player
-player.setCurrentTime(currentTime);
-
-// Listen for time updates and save the current time to local storage
 player.on(
   "timeupdate",
-  throttle(function (data) {
-    currentTime = data.seconds;
+  throttle(() => {
+    const currentTime = JSON.stringify(player.getCurrentTime());
     localStorage.setItem("videoplayer-current-time", currentTime);
   }, 1000)
 );
+
+const currentTime = localStorage.getItem("videoplayer-current-time");
+if (currentTime) {
+  player.setCurrentTime(JSON.parse(currentTime));
+}
