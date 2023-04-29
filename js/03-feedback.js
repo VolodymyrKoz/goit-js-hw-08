@@ -1,6 +1,4 @@
 // Імпортуємо бібліотеку lodash.throttle
-import throttle from "./lodash.throttle.js";
-
 import { throttle } from "lodash";
 
 // Usage:
